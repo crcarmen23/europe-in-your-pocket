@@ -1,0 +1,22 @@
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+header {
+    background-color: rgb(68, 111, 68);
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 5px;
+}
+
+.hero-image {
+    background-image: url(../europe.jpg);
+    height: 190px;
+    width: 100%;
+    margin-bottom: 25px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
