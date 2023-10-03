@@ -5,18 +5,25 @@
 
 header {
     background-color: rgb(68, 111, 68);
-    color: white;
-    text-align: center;
+    text-align: left;
     margin: 0;
     padding: 5px;
 }
 
-.hero-image {
-    background-image: url(../europe.jpg);
-    height: 190px;
-    width: 100%;
-    margin-bottom: 25px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
+.navbar {
+    background-color: rgb(68, 111, 68);
+    color: white !important;
+    padding-top: -50px;
 }
+
+button {
+background-color: rgb(68, 111, 68) !important;
+color: white;
+border-radius: 10px;
+margin: 5px;
+}
+
+img {
+    height: 300px !important;
+}
+

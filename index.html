@@ -4,41 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Europe in Your Pocket</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <header>
-    <h1>&#8364urope in Your Pocket</h1>
-    <p>Enter your budget in USD below to convert to Euros or use the flight/hotel finders to search for transportation to or lodging in your target destination!</p>
+
+    <header class="hero-head is-small">
+    <h1 class="title p-2 is-size-1 has-text-white">&#8364urope in Your Pocket</h1>
+    <p class="subtitle p-2 is-size-6 has-text-white">Enter your budget in USD below to convert to Euros or use the flight/hotel<br>finders 
+    to search for transportation to/lodging in your target destination!</p>
+    <nav class="navbar-end is-fixed-top">
+        <ul>
+            <li>
+                <a class="navbar-item has-text-white is-hoverable" href="#currency-calculator">Currency Converter</a>
+            </li>
+            <li>
+                <a class="navbar-item has-text-white is-hoverable" href="#flight-finder">Flights</a>
+                
+            </li>
+            <li>
+                <a class="navbar-item has-text-white is-hoverable" href="#hotel-finder">Hotels</a>
+            </li>
+        </ul>
+    </nav>
     </header>
 
-    <div class="hero-image"></div>
+    <figure class="image">
+        <img src="./assets/europe.jpg" alt="This is a picture of a bridge in Europe">
+    </figure>
 
-    <Section class="container-left">
-        <div class="currency-calculator">
+    <div class="sections" id="container-left">
+        <div class="section is-medium m-0" id="currency-calculator">
             <h3>USD to Euro Calculator</h3>
-            <h5>Enter a USD amount:</h5>
+            <h5>Enter a $ amount:</h5>
             <form id="search-form">
               <input id="usd" type="text"/>
-              <button type="submit" class="btn">Convert!</button>
+              <br>
+              <button type="submit" class="button is-medium is-info">Convert!</button>
             </form>
           </div>
 
-        <div class="flight-finder">
+        <div class="section is-medium" id="flight-finder">
+            <div class="tile is-parent is-vertical is-success">
             <h3>Flight Finder</h3>
             <h5>Enter a destination below:</h5>
             <form id="flight-search-form">
               <input id="flight-city" type="text"/>
-              <button type="submit" class="btn">Get Flights</button>
+              <br>
+              <button type="submit" class="button is-medium is-info">Get Flights</button>
             </form>
+        </div>
           </div>
 
-        <div class="hotel-finder">
+        <div class="section is-medium" id="hotel-finder">
             <h3>Hotel Finder</h3>
             <h5>Enter a destination below:</h5>
             <form id="search-form">
               <input id="hotel-city" type="text"/>
-              <button type="submit" class="btn">Find Hotels Near Me</button>
+              <br>
+              <button type="submit" class="button is-medium is-info">Find Hotels Near Me</button>
             </form>
           </div>
     </section>
