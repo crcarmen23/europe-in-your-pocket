@@ -3,11 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Europe in Your Pocket</title>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    
+    <header>
+    <h1>&#8364urope in Your Pocket</h1>
+    <p>Enter your budget in USD below to convert to Euros or use the flight/hotel finders to search for transportation to or lodging in your target destination!</p>
+    </header>
+
+    <div class="hero-image"></div>
+
+    <Section class="container-left">
+        <div class="currency-calculator">
+            <h3>USD to Euro Calculator</h3>
+            <h5>Enter a USD amount:</h5>
+            <form id="search-form">
+              <input id="usd" type="text"/>
+              <button type="submit" class="btn">Convert!</button>
+            </form>
+          </div>
+
+        <div class="flight-finder">
+            <h3>Flight Finder</h3>
+            <h5>Enter a destination below:</h5>
+            <form id="flight-search-form">
+              <input id="flight-city" type="text"/>
+              <button type="submit" class="btn">Get Flights</button>
+            </form>
+          </div>
+
+        <div class="hotel-finder">
+            <h3>Hotel Finder</h3>
+            <h5>Enter a destination below:</h5>
+            <form id="search-form">
+              <input id="hotel-city" type="text"/>
+              <button type="submit" class="btn">Find Hotels Near Me</button>
+            </form>
+          </div>
+    </section>
+
+    <section class="container-right">
+        <div class="currency-conversion">
+        </div>
+        <div class="flight-data">
+        </div>
+        <div class="hotel-data">
+        </div>
+    </section>
+
     <script src="assets/js/script.js"></script>
 </body>
 </html>
