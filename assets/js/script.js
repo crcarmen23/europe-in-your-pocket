@@ -1,7 +1,17 @@
-const apiUrl = 'https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD';
-const APIkey = '6e2a72528ec1fefdb7cb82e0';
-
-fetch('https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD')
+var searchForm = document.getElementById ("search-form")
+// Chart.js module
+const chartModule = (() => {
+    // Functions related to Chart.js integration
+  })();
+  
+  // API integration modules
+  const currencyApiModule = (event) => {
+    event.preventDefault()
+    console.log(document.getElementById("amount").value);
+    const apiUrl = 'https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD';
+    const APIkey = '6e2a72528ec1fefdb7cb82e0';
+    // Functions for currency API integration
+    fetch('https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD')
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -15,18 +25,9 @@ fetch('https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD')
   .catch(error => {
     console.error('Fetch error:', error);
   });
+  };
+  searchForm.addEventListener("submit", currencyApiModule)
 
-
-// Chart.js module
-const chartModule = (() => {
-    // Functions related to Chart.js integration
-  })();
-  
-  // API integration modules
-  const currencyApiModule = (() => {
-    // Functions for currency API integration
-  })();
-  
   const flightsApiModule = (() => {
     // Functions for flights API integration
   })();
