@@ -73,5 +73,3 @@ const init = () => {
 document.addEventListener('DOMContentLoaded', () => {
   init();
 });
-
-var searchForm = document.getElementById ("search-form")
