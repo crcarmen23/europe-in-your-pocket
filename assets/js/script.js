@@ -26,6 +26,19 @@ const chartModule = (() => {
     console.error('Fetch error:', error);
   });
   };
+  
+  const dropdownList = document.getElementById('dropList');
+
+  fetch('https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD')
+    .then(response => response.json())
+    .then(data => {
+      populateDropdown(data);
+    });
+    function populateDropdown(data) {
+      console.log(data);
+      };
+    
+
   searchForm.addEventListener("submit", currencyApiModule)
 
   const flightsApiModule = (() => {
