@@ -1,16 +1,58 @@
+
+const apiUrl = 'https://v6.exchangerate-api.com/v6';
+const APIkey = '6e2a72528ec1fefdb7cb82e0';
+
 var searchForm = document.getElementById("search-form")
+
 // Chart.js module
 const chartModule = (() => {
   // Functions related to Chart.js integration
 })();
+
+window.onload = getCodes;
+var codes = []
+function getCodes() {
+  dropListInput = document.getElementById('dropListInput')
+  dropListOutput = document.getElementById('dropListOutput')
+
+  fetch(`${apiUrl}/${APIkey}/codes`, {
+    mode: 'cors',
+    headers: {
+      // 'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    }
+  })
+    .then(response => response.json())
+    .then(data => {
+      //Process the data retrieved from the server
+      console.log(data);
+      codes = data.supported_codes
+      for (let i = 0; i < data.supported_codes.length; i++) {
+        //console.log(codes[i][1])
+        var optionIn = document.createElement("option");
+        optionIn.value = codes[i][0];
+        optionIn.text = codes[i][1];
+        dropListInput.appendChild(optionIn);
+        
+        var optionOut = document.createElement("option");
+        optionOut.value = codes[i][0];
+        optionOut.text = codes[i][1];
+        dropListOutput.appendChild(optionOut);
+      }
+
+    })
+    .catch(error => {
+      console.error('Fetch error:', error);
+    });
+}
+
+
 // const conversionUSDtoEUR = data.conversion_rates.EUR
 // const baseUrl = 'https://v6.exchangeratesapi.io/latest';
 // API integration modules
 const currencyApiModule = (event) => {
   event.preventDefault()
-  // console.log(document.getElementById("amount").value);
-  const apiUrl = 'https://v6.exchangerate-api.com/v6';
-  const APIkey = '6e2a72528ec1fefdb7cb82e0';
+  // console.log(document.getElementById("amount").value);  
   // const url=`${apiUrl}/latest?access_key=${APIkey}&base=USD`
   // const url=`${apiUrl}/latest/${APIkey}/USD`
   // const APIkey = '6e2a72528ec1fefdb7cb82e0';
@@ -30,11 +72,11 @@ const currencyApiModule = (event) => {
       console.log(data.conversion_rates.EUR)
       var input = document.getElementById("calculator-input").value
       console.log(input)
-      const formatter = new Intl.NumberFormat('en-US', { 
+      const formatter = new Intl.NumberFormat('en-US', {
         minimumFractionDigits: 2
       })
-      
-      document.getElementById("calculator-output").innerHTML = formatter.format(input*data.conversion_rates.EUR) + " Euros"
+
+      document.getElementById("calculator-output").innerHTML = formatter.format(input * data.conversion_rates.EUR) + " Euros"
     })
     .catch(error => {
       console.error('Fetch error:', error);
