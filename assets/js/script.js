@@ -82,25 +82,15 @@ const hotelsApiModule = (() => {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "09f44e6dc4mshc8f7d74c2bd23d3p13a40ajsn216530582ac6",
+      "X-RapidAPI-Key": "6eb4b4c13bmshfee3d464e5fa587p106a74jsn4cc33a147548",
       "X-RapidAPI-Host": "hotels-com-provider.p.rapidapi.com",
     },
   };
 
   fetch(url, options)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      // Process the data received from the API
-      console.log("Data received:", data);
-    })
-    .catch((error) => {
-      console.error("There was an error:", error);
-    });
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
 })();
 
 // UI update modules
