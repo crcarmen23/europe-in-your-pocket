@@ -1,6 +1,6 @@
 const currencyApiUrl = "https://v6.exchangerate-api.com/v6";
 const currencyAPIkey = "6e2a72528ec1fefdb7cb82e0";
-const weatherApiKey = "6376e7a506e8e7aec86c7392c3ee155a";
+const weatherApiKey = "0b9a41ab88d3449f9b0210738230510";
 
 const cacheName = "my-data-cache";
 /* window.onload = async () => {
@@ -120,7 +120,7 @@ const searchForCity = (event) => {
   const cityInput = document.getElementById("weather-city");
   if (cityInput) {
     const cityName = cityInput.value;
-    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${weatherApiKey}`;
+    const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${cityName}`;
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
@@ -128,13 +128,13 @@ const searchForCity = (event) => {
         city.textContent = cityName;
 
         const temp = document.getElementById(`temp`);
-        temp.textContent = `High Temp: ${data.main.temp_max.toFixed(2)}° F`;
+        temp.textContent = `High Temp: ${data.current.temp_f}° F`;
 
         const wind = document.getElementById(`wind`);
-        wind.textContent = `Wind: ${data.wind.speed.toFixed(2)} MPH`;
+        wind.textContent = `Wind: ${data.current.wind_mph} MPH`;
 
         const humidity = document.getElementById(`humidity`);
-        humidity.textContent = `Humidity: ${data.main.humidity.toFixed(0)} %`;
+        humidity.textContent = `Humidity: ${data.current.humidity} %`;
 
         const weatherCard = document.getElementById("weather-card");
         if (weatherCard) {
