@@ -1,6 +1,6 @@
 
-const apiUrl = 'https://v6.exchangerate-api.com/v6';
-const APIkey = '6e2a72528ec1fefdb7cb82e0';
+const currencyApiUrl = 'https://v6.exchangerate-api.com/v6';
+const currencyAPIkey = '6e2a72528ec1fefdb7cb82e0';
 
 var searchForm = document.getElementById("search-form")
 
@@ -16,7 +16,7 @@ async function getCodes() {
     const cache = await caches.open(cacheName);
 
     // Check if the data is in the cache
-    const cachedResponse = await cache.match(`${apiUrl}/${APIkey}/codes`);
+    const cachedResponse = await cache.match(`${currencyApiUrl}/${currencyAPIkey}/codes`);
 
     if (cachedResponse) {
       console.log('Using cached response')
@@ -44,10 +44,10 @@ async function getCodes() {
       console.log('Data not found in cache. Fetching and caching now...');
 
       // Fetch the data from the server
-      const response = await fetch(`${apiUrl}/${APIkey}/codes`);
+      const response = await fetch(`${currencyApiUrl}/${currencyAPIkey}/codes`);
 
       // Store the fetched data in the cache
-      cache.put(`${apiUrl}/${APIkey}/codes`, response.clone());
+      cache.put(`${currencyApiUrl}/${currencyAPIkey}/codes`, response.clone());
       
       const data = await response.json();
 
@@ -92,7 +92,7 @@ const currencyApiModule = (event) => {
   var input = document.getElementById("calculator-input").value
   //console.log(currencyIn)
   //console.log(currencyOut)
-  fetch(`${apiUrl}/${APIkey}/pair/${currencyIn}/${currencyOut}/${input}`, {
+  fetch(`${currencyApiUrl}/${currencyAPIkey}/pair/${currencyIn}/${currencyOut}/${input}`, {
     mode: 'cors',
     headers: {
       // 'Content-Type': 'application/json',
@@ -113,18 +113,8 @@ const currencyApiModule = (event) => {
 searchForm.addEventListener("submit", currencyApiModule)
 
 
-// UI update modules
-const currencyUIModule = (() => {
-  // Functions to update the currency UI
-})();
+//functions to make weather data display
 
-const flightsUIModule = (() => {
-  // Functions to update the flights UI
-})();
-
-const hotelsUIModule = (() => {
-  // Functions to update the hotels UI
-})();
 
 // Initialization
 const init = () => {
