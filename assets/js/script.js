@@ -116,6 +116,26 @@ const hotelsApiModule = (() => {
   // Functions for hotels API integration
 })();
 
+async function callHotelsApi() {
+  const url = "https://hotels4.p.rapidapi.com/v2/get-meta-data";
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "6eb4b4c13bmshfee3d464e5fa587p106a74jsn4cc33a147548",
+      "X-RapidAPI-Host": "hotels4.p.rapidapi.com",
+    },
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.text();
+    console.log("---------Logging Hotels API results --------------------")
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // UI update modules
 const currencyUIModule = (() => {
   // Functions to update the currency UI
@@ -137,4 +157,7 @@ const init = () => {
 // Run initialization when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   init();
+
+  callHotelsApi();
 });
+
