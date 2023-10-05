@@ -2,89 +2,95 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Europe in Your Pocket</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Europe in Your Pocket</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
 
-    <header class="hero-head is-small columns mb-0">
-        <div class="column is-half">
-            <h1 class="title p-2 is-size-1 has-text-white pl-5">&#8364urope in Your Pocket</h1>
-            <p class="subtitle p-1 is-size-6 has-text-white pl-5">Enter your budget in USD below to convert to Euros or use
-                the flight/hotel<br>finders
-                to search for transportation to/lodging in your target destination!</p>
-        </div>
-        <nav class="column is-half navbar-menu is-transparent is-flex is-align-items-center pr-5">
-            <div class="navbar-end">
-                <ul class="is-flex is-align-items-center">
-                    <li>
-                        <a class="navbar-item has-text-white is-size-4 is-hoverable" href="#currency-calculator">Currency
-                            Converter |</a>
-                    </li>
-                    <li>
-                        <a class="navbar-item has-text-white is-size-4 is-hoverable" href="#flight-finder">Flights |</a>
+  <header class="hero-head is-small columns mb-0">
+    <div class="column is-half">
+      <h1 class="title p-2 is-size-1 has-text-white pl-5">&#8364urope in Your Pocket</h1>
+      <p class="subtitle p-1 is-size-6 has-text-white pl-5">Enter your budget in USD below to convert to Euros or use
+        the flight/hotel<br>finders
+        to search for transportation to/lodging in your target destination!</p>
+    </div>
+    <nav class="column is-half navbar-menu is-transparent is-flex is-align-items-center pr-5">
+      <div class="navbar-end">
+        <ul class="is-flex is-align-items-center">
+          <li>
+            <a class="navbar-item has-text-white is-size-4 is-hoverable" href="#currency-calculator">Currency
+              Converter |</a>
+          </li>
+          <li>
+            <a class="navbar-item has-text-white is-size-4 is-hoverable" href="#flight-finder">Flights |</a>
 
-                    </li>
-                    <li>
-                        <a class="navbar-item has-text-white is-size-4 is-hoverable" href="#hotel-finder">Hotels</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+          </li>
+          <li>
+            <a class="navbar-item has-text-white is-size-4 is-hoverable" href="#hotel-finder">Hotels</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-    <figure class="image mt-0">
-        <img src="./assets/europe.jpg" alt="This is a picture of a bridge in Europe">
-    </figure>
+  <figure class="image mt-0">
+    <img src="./assets/europe.jpg" alt="This is a picture of a bridge in Europe">
+  </figure>
 
-    <div class="sections" id="container-left">
-        <div class="section is-medium m-0" id="currency-calculator">
-            <h3>USD to Euro Calculator</h3>
-            <h5>Enter a $ amount:</h5>
-            <form id="search-form">
-                <input id="usd" type="text" />
-                <br>
-                <button type="submit" class="button is-medium is-info">Convert!</button>
-            </form>
-        </div>
+  <div class="sections" id="container-left">
+    <div class="section is-medium m-0" id="currency-calculator">
+      <h2>Currency Calculator</h2>
+      <p>Select Two Currencies and Enter an Amount</p>
+      <form id="search-form" method="post">
+        <input id="calculator-input" type="text" placeholder="Enter a Currency Amount" />    
+        <br>
+        <select id="dropListInput"></select>
+        to
+        <select id="dropListOutput"></select>
+        <br>
+        <button type="submit" class="button is-medium is-info">Convert!</button>
+        
+      </form>
+      <h6><strong><span id="calculator-output"></span></strong></h6>
+    </div>
 
-        <div class="section is-medium" id="flight-finder">
-            <div class="tile is-parent is-vertical is-success">
-                <h3>Flight Finder</h3>
-                <h5>Enter a destination below:</h5>
-                <form id="flight-search-form">
-                    <input id="flight-city" type="text" />
-                    <br>
-                    <button type="submit" class="button is-medium is-info">Get Flights</button>
-                </form>
-            </div>
-        </div>
+    <div class="section is-medium" id="flight-finder">
+      <div class="tile is-parent is-vertical is-success">
+        <h3>Flight Finder</h3>
+        <h5>Enter a destination below:</h5>
+        <form id="flight-search-form">
+          <input id="flight-city" type="text" />
+          <br>
+          <button type="submit" class="button is-medium is-info">Get Flights</button>
+        </form>
+      </div>
+    </div>
 
-        <div class="section is-medium" id="hotel-finder">
-            <h3>Hotel Finder</h3>
-            <h5>Enter a destination below:</h5>
-            <form id="search-form">
-                <input id="hotel-city" type="text" />
-                <br>
-                <button type="submit" class="button is-medium is-info">Find Hotels Near Me</button>
-            </form>
-        </div>
-        </section>
+    <div class="section is-medium" id="hotel-finder">
+      <h3>Hotel Finder</h3>
+      <h5>Enter a destination below:</h5>
+      <form id="search-form">
+        <input id="hotel-city" type="text" />
+        <br>
+        <button type="submit" class="button is-medium is-info">Find Hotels Near Me</button>
+      </form>
+    </div>
+    </section>
 
-        <section class="container-right">
-            <div class="currency-conversion">
-            </div>
-            <div class="flight-data">
-            </div>
-            <div class="hotel-data">
-            </div>
-        </section>
+    <section class="container-right">
+      <div class="currency-conversion">
+      </div>
+      <div class="flight-data">
+      </div>
+      <div class="hotel-data">
+      </div>
+    </section>
 
-        <script src="assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
