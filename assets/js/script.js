@@ -1,4 +1,7 @@
+const apiUrl = "https://v6.exchangerate-api.com/v6";
+const APIkey = "6e2a72528ec1fefdb7cb82e0";
 
+<<<<<<< HEAD
 const apiUrl = 'https://v6.exchangerate-api.com/v6';
 const APIkey = '6e2a72528ec1fefdb7cb82e0';
 
@@ -89,19 +92,33 @@ async function getCodes() {
 
   dropListInput = document.getElementById('dropListInput')
   dropListOutput = document.getElementById('dropListOutput')
+=======
+var searchForm = document.getElementById("search-form");
+
+window.onload = getCodes;
+var codes = [];
+function getCodes() {
+  dropListInput = document.getElementById("dropListInput");
+  dropListOutput = document.getElementById("dropListOutput");
+>>>>>>> c74e242ef288d83e82a4928878a4d7c62b53a873
 
   fetch(`${apiUrl}/${APIkey}/codes`, {
-    mode: 'cors',
+    mode: "cors",
     headers: {
       // 'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    }
+      "Access-Control-Allow-Origin": "*",
+    },
   })
+<<<<<<< HEAD
     .then(response)
     .then(data => {
+=======
+    .then((response) => response.json())
+    .then((data) => {
+>>>>>>> c74e242ef288d83e82a4928878a4d7c62b53a873
       //Process the data retrieved from the server
       //console.log(data);
-      codes = data.supported_codes
+      codes = data.supported_codes;
       for (let i = 0; i < data.supported_codes.length; i++) {
         //console.log(codes[i][1])
         var optionIn = document.createElement("option");
@@ -114,47 +131,59 @@ async function getCodes() {
         optionOut.text = codes[i][1];
         dropListOutput.appendChild(optionOut);
       }
-
     })
-    .catch(error => {
-      console.error('Fetch error:', error);
+    .catch((error) => {
+      console.error("Fetch error:", error);
     });
 }
+<<<<<<< HEAD
 */
+=======
+>>>>>>> c74e242ef288d83e82a4928878a4d7c62b53a873
 
 // const conversionUSDtoEUR = data.conversion_rates.EUR
 // const baseUrl = 'https://v6.exchangeratesapi.io/latest';
 // API integration modules
 const currencyApiModule = (event) => {
-  event.preventDefault()
-  // console.log(document.getElementById("amount").value);  
+  event.preventDefault();
+  // console.log(document.getElementById("amount").value);
   // const url=`${apiUrl}/latest?access_key=${APIkey}&base=USD`
   // const url=`${apiUrl}/latest/${APIkey}/USD`
   // const APIkey = '6e2a72528ec1fefdb7cb82e0';
   // Functions for currency API integration
+<<<<<<< HEAD
   var currencyIn = document.getElementById('dropListInput').value
   var currencyOut = document.getElementById('dropListOutput').value
   var input = document.getElementById("calculator-input").value
   //console.log(currencyIn)
   //console.log(currencyOut)
+=======
+  var currencyIn = document.getElementById("dropListInput").value;
+  var currencyOut = document.getElementById("dropListOutput").value;
+  var input = document.getElementById("calculator-input").value;
+  console.log(currencyIn);
+  console.log(currencyOut);
+>>>>>>> c74e242ef288d83e82a4928878a4d7c62b53a873
   fetch(`${apiUrl}/${APIkey}/pair/${currencyIn}/${currencyOut}/${input}`, {
-    mode: 'cors',
+    mode: "cors",
     headers: {
       // 'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    }
+      "Access-Control-Allow-Origin": "*",
+    },
   })
-    .then(response => response.json())
-    .then(data => {
+    .then((response) => response.json())
+    .then((data) => {
       //   // Process the data retrieved from the server
       //console.log(data);
       //console.log(input)
-      document.getElementById("calculator-output").innerHTML = data.conversion_result.toFixed(2) + ' ' + currencyOut
+      document.getElementById("calculator-output").innerHTML =
+        data.conversion_result.toFixed(2) + " " + currencyOut;
     })
-    .catch(error => {
-      console.error('Fetch error:', error);
+    .catch((error) => {
+      console.error("Fetch error:", error);
     });
 };
+<<<<<<< HEAD
 searchForm.addEventListener("submit", currencyApiModule)
 
 
@@ -177,18 +206,31 @@ searchForm.addEventListener("submit", currencyApiModule)
 //     });
 //   // Functions for flights API integration
 // })();
+=======
+searchForm.addEventListener("submit", currencyApiModule);
+>>>>>>> c74e242ef288d83e82a4928878a4d7c62b53a873
 
 const hotelsApiModule = (() => {
   // Functions for hotels API integration
+  const url =
+    "https://hotels-com-provider.p.rapidapi.com/v2/meta/convert/slug-id?slug=ho219115";
+  const options = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": "6eb4b4c13bmshfee3d464e5fa587p106a74jsn4cc33a147548",
+      "X-RapidAPI-Host": "hotels-com-provider.p.rapidapi.com",
+    },
+  };
+
+  fetch(url, options)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
 })();
 
 // UI update modules
 const currencyUIModule = (() => {
   // Functions to update the currency UI
-})();
-
-const flightsUIModule = (() => {
-  // Functions to update the flights UI
 })();
 
 const hotelsUIModule = (() => {
@@ -201,6 +243,6 @@ const init = () => {
 };
 
 // Run initialization when the DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   init();
 });
