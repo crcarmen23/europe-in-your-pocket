@@ -28,28 +28,29 @@ const currencyApiModule = (event) => {
 };
 searchForm.addEventListener("submit", currencyApiModule)
 
-const flightsApiModule = (() => {
-  const flightApiUrl = "https://api.aviationstack.com/v1/flights";
-  const flightKey = "12e5b1703d9f0bd7eb3883bb358f97ae";
+// const flightsApiModule = (event) => {
+  // event.preventDefault()
+  // const flightApiUrl = "https://api.aviationstack.com/v1/flights";
+  // const flightKey = "12e5b1703d9f0bd7eb3883bb358f97ae";
 
-  // https://api.aviationstack.com/v1/flights?access_key=12e5b1703d9f0bd7eb3883bb358f97ae
-
-  fetch("https://api.aviationstack.com/v1/flights?access_key=12e5b1703d9f0bd7eb3883bb358f97ae")
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
-      console.error("Fetch error:", error);
-    });
   // Functions for flights API integration
-})();
+  // fetch("https://api.aviationstack.com/v1/flights?access_key=12e5b1703d9f0bd7eb3883bb358f97ae")
+    // .then(res => {
+      // if (!response.ok) {
+        // throw new Error("Response was not okay")
+      // }
+      // return res.json();
+    // })
+    // .then(data => {
+      // console.log(data);
+    // })
+    // .catch(error => {
+      // console.error("Fetch error:", error);
+    // });
 
-const hotelsApiModule = (() => {
-  // Functions for hotels API integration
-})();
+// };
+// searchForm.addEventListener("submit", currencyApiModule);
+
 
 // UI update modules
 const currencyUIModule = (() => {
