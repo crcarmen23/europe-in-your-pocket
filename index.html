@@ -46,7 +46,7 @@
       <h2 class="label is-large">Currency Calculator</h2>
       <p>Select Two Currencies and Enter an Amount</p>
       <form id="search-form" method="post">
-        <input class="input" id="calculator-input" type="text" placeholder="Enter a Currency Amount" />    
+        <input class="input" id="calculator-input" type="text" placeholder="Enter a Currency Amount" required/>    
         <br>
         <select id="dropListInput"></select>
         to
@@ -63,10 +63,10 @@
         <h3 class="label is-large">&#9992Flight Finder</h3>
         <form id="flight-search-form">
             <h5>To:</h5>
-          <input class="input" id="flight-city" type="text" />
+          <input class="input" id="flight-city-input" type="text" />
           <br>
           <h5>From:</h5>
-          <input class="input" id="flight-city" type="text" />
+          <input class="input" id="flight-city-output" type="text" />
           <button type="submit" class="button is-medium is-info">Get Flights</button>
         </form>
       </div>

@@ -8,10 +8,85 @@ var searchForm = document.getElementById("search-form")
 // const chartModule = (() => {
 //   // Functions related to Chart.js integration
 // })();
+const cacheName = 'my-data-cache';
+window.onload = async () => {
+  await getCodes();
+};
 
-window.onload = getCodes;
-var codes = []
-function getCodes() {
+// Function to fetch data and populate the dropdown
+async function getCodes() {
+  try {
+    // Open the cache
+    const cache = await caches.open(cacheName);
+
+    // Check if the data is in the cache
+    const cachedResponse = await cache.match(`${apiUrl}/${APIkey}/codes`);
+
+    if (cachedResponse) {
+      console.log('Using cached response')
+      // If data is found in the cache, use it
+      const data = await cachedResponse.json();
+      
+      var codes = []
+      dropListInput = document.getElementById('dropListInput')
+      dropListOutput = document.getElementById('dropListOutput')
+
+      codes = data.supported_codes
+      for (let i = 0; i < data.supported_codes.length; i++) {
+        //console.log(codes[i][1])
+        var optionIn = document.createElement("option");
+        optionIn.value = codes[i][0];
+        optionIn.text = codes[i][1];
+        dropListInput.appendChild(optionIn);
+
+        var optionOut = document.createElement("option");
+        optionOut.value = codes[i][0];
+        optionOut.text = codes[i][1];
+        dropListOutput.appendChild(optionOut);
+      }
+    } else {
+      console.log('Data not found in cache. Fetching and caching now...');
+
+      // Fetch the data from the server
+      const response = await fetch(`${apiUrl}/${APIkey}/codes`);
+
+      // Store the fetched data in the cache
+      cache.put(`${apiUrl}/${APIkey}/codes`, response.clone());
+      
+      const data = await response.json();
+
+      // Populate the dropdown with the fetched data
+      var codes = []
+      dropListInput = document.getElementById('dropListInput')
+      dropListOutput = document.getElementById('dropListOutput')
+
+      // Clear existing options
+      dropListInput.innerHTML = '';      
+      dropListOutput.innerHTML = '';
+
+      codes = data.supported_codes
+      for (let i = 0; i < data.supported_codes.length; i++) {
+        //console.log(codes[i][1])
+        var optionIn = document.createElement("option");
+        optionIn.value = codes[i][0];
+        optionIn.text = codes[i][1];
+        dropListInput.appendChild(optionIn);
+
+        var optionOut = document.createElement("option");
+        optionOut.value = codes[i][0];
+        optionOut.text = codes[i][1];
+        dropListOutput.appendChild(optionOut);
+      }
+    }
+  } catch (error) {
+    console.error('Error getting data from cache or server:', error);
+  }
+}
+/*
+async function getCodes() {
+
+  var codes = []
+
   dropListInput = document.getElementById('dropListInput')
   dropListOutput = document.getElementById('dropListOutput')
 
@@ -22,7 +97,7 @@ function getCodes() {
       'Access-Control-Allow-Origin': '*'
     }
   })
-    .then(response => response.json())
+    .then(response)
     .then(data => {
       //Process the data retrieved from the server
       //console.log(data);
@@ -45,7 +120,7 @@ function getCodes() {
       console.error('Fetch error:', error);
     });
 }
-
+*/
 
 // const conversionUSDtoEUR = data.conversion_rates.EUR
 // const baseUrl = 'https://v6.exchangeratesapi.io/latest';
@@ -60,8 +135,8 @@ const currencyApiModule = (event) => {
   var currencyIn = document.getElementById('dropListInput').value
   var currencyOut = document.getElementById('dropListOutput').value
   var input = document.getElementById("calculator-input").value
-  console.log(currencyIn)
-  console.log(currencyOut)
+  //console.log(currencyIn)
+  //console.log(currencyOut)
   fetch(`${apiUrl}/${APIkey}/pair/${currencyIn}/${currencyOut}/${input}`, {
     mode: 'cors',
     headers: {
@@ -81,6 +156,8 @@ const currencyApiModule = (event) => {
     });
 };
 searchForm.addEventListener("submit", currencyApiModule)
+
+
 
 // const flightsApiModule = (() => {
 //   const flightApiUrl = "https://api.aviationstack.com/v1/flights";
