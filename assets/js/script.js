@@ -25,7 +25,7 @@ function getCodes() {
     .then(response => response.json())
     .then(data => {
       //Process the data retrieved from the server
-      console.log(data);
+      //console.log(data);
       codes = data.supported_codes
       for (let i = 0; i < data.supported_codes.length; i++) {
         //console.log(codes[i][1])
@@ -33,7 +33,7 @@ function getCodes() {
         optionIn.value = codes[i][0];
         optionIn.text = codes[i][1];
         dropListInput.appendChild(optionIn);
-        
+
         var optionOut = document.createElement("option");
         optionOut.value = codes[i][0];
         optionOut.text = codes[i][1];
@@ -57,7 +57,12 @@ const currencyApiModule = (event) => {
   // const url=`${apiUrl}/latest/${APIkey}/USD`
   // const APIkey = '6e2a72528ec1fefdb7cb82e0';
   // Functions for currency API integration
-  fetch('https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD', {
+  var currencyIn = document.getElementById('dropListInput').value
+  var currencyOut = document.getElementById('dropListOutput').value
+  var input = document.getElementById("calculator-input").value
+  console.log(currencyIn)
+  console.log(currencyOut)
+  fetch(`${apiUrl}/${APIkey}/pair/${currencyIn}/${currencyOut}/${input}`, {
     mode: 'cors',
     headers: {
       // 'Content-Type': 'application/json',
@@ -67,16 +72,9 @@ const currencyApiModule = (event) => {
     .then(response => response.json())
     .then(data => {
       //   // Process the data retrieved from the server
-      console.log(data);
-      console.log(data.conversion_rates.USD)
-      console.log(data.conversion_rates.EUR)
-      var input = document.getElementById("calculator-input").value
-      console.log(input)
-      const formatter = new Intl.NumberFormat('en-US', {
-        minimumFractionDigits: 2
-      })
-
-      document.getElementById("calculator-output").innerHTML = formatter.format(input * data.conversion_rates.EUR) + " Euros"
+      //console.log(data);
+      //console.log(input)
+      document.getElementById("calculator-output").innerHTML = data.conversion_result.toFixed(2) + ' ' + currencyOut
     })
     .catch(error => {
       console.error('Fetch error:', error);
