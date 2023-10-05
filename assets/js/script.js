@@ -77,21 +77,8 @@ searchForm.addEventListener("submit", currencyApiModule);
 
 const hotelsApiModule = (() => {
   // Functions for hotels API integration
-  const url =
-    "https://hotels-com-provider.p.rapidapi.com/v2/meta/convert/slug-id?slug=ho219115";
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "6eb4b4c13bmshfee3d464e5fa587p106a74jsn4cc33a147548",
-      "X-RapidAPI-Host": "hotels-com-provider.p.rapidapi.com",
-    },
-  };
-
-  fetch(url, options)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
-})();
+  
+})(); 
 
 // UI update modules
 const currencyUIModule = (() => {
@@ -110,4 +97,6 @@ const init = () => {
 // Run initialization when the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
   init();
+
+  callHotelsApi();
 });
