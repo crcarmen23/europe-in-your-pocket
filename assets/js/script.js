@@ -4,10 +4,10 @@ const APIkey = '6e2a72528ec1fefdb7cb82e0';
 
 var searchForm = document.getElementById("search-form")
 
-// Chart.js module
-const chartModule = (() => {
-  // Functions related to Chart.js integration
-})();
+// // Chart.js module
+// const chartModule = (() => {
+//   // Functions related to Chart.js integration
+// })();
 
 window.onload = getCodes;
 var codes = []
