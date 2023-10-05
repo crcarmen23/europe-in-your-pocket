@@ -1,26 +1,33 @@
-const apiUrl = "https://v6.exchangerate-api.com/v6";
-const APIkey = "6e2a72528ec1fefdb7cb82e0";
 
-var searchForm = document.getElementById("search-form");
+const apiUrl = 'https://v6.exchangerate-api.com/v6';
+const APIkey = '6e2a72528ec1fefdb7cb82e0';
 
-window.onload = getCodes;
-var codes = [];
-function getCodes() {
-  dropListInput = document.getElementById("dropListInput");
-  dropListOutput = document.getElementById("dropListOutput");
+var searchForm = document.getElementById("search-form")
 
-  fetch(`${apiUrl}/${APIkey}/codes`, {
-    mode: "cors",
-    headers: {
-      // 'Content-Type': 'application/json',
-      "Access-Control-Allow-Origin": "*",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      //Process the data retrieved from the server
-      //console.log(data);
-      codes = data.supported_codes;
+const cacheName = 'my-data-cache';
+window.onload = async () => {
+  await getCodes();
+};
+
+// Function to fetch data and populate the dropdown
+async function getCodes() {
+  try {
+    // Open the cache
+    const cache = await caches.open(cacheName);
+
+    // Check if the data is in the cache
+    const cachedResponse = await cache.match(`${apiUrl}/${APIkey}/codes`);
+
+    if (cachedResponse) {
+      console.log('Using cached response')
+      // If data is found in the cache, use it
+      const data = await cachedResponse.json();
+      var codes = []
+      dropListInput = document.getElementById('dropListInput')
+      dropListOutput = document.getElementById('dropListOutput')
+
+
+      codes = data.supported_codes
       for (let i = 0; i < data.supported_codes.length; i++) {
         //console.log(codes[i][1])
         var optionIn = document.createElement("option");
@@ -33,69 +40,89 @@ function getCodes() {
         optionOut.text = codes[i][1];
         dropListOutput.appendChild(optionOut);
       }
-    })
-    .catch((error) => {
-      console.error("Fetch error:", error);
-    });
+    } else {
+      console.log('Data not found in cache. Fetching and caching now...');
+
+      // Fetch the data from the server
+      const response = await fetch(`${apiUrl}/${APIkey}/codes`);
+
+      // Store the fetched data in the cache
+      cache.put(`${apiUrl}/${APIkey}/codes`, response.clone());
+      
+      const data = await response.json();
+
+      // Populate the dropdown with the fetched data
+      var codes = []
+      dropListInput = document.getElementById('dropListInput')
+      dropListOutput = document.getElementById('dropListOutput')
+
+      // Clear existing options
+      dropListInput.innerHTML = '';      
+      dropListOutput.innerHTML = '';
+
+      codes = data.supported_codes
+      for (let i = 0; i < data.supported_codes.length; i++) {
+        //console.log(codes[i][1])
+        var optionIn = document.createElement("option");
+        optionIn.value = codes[i][0];
+        optionIn.text = codes[i][1];
+        dropListInput.appendChild(optionIn);
+
+        var optionOut = document.createElement("option");
+        optionOut.value = codes[i][0];
+        optionOut.text = codes[i][1];
+        dropListOutput.appendChild(optionOut);
+      }
+    }
+  } catch (error) {
+    console.error('Error getting data from cache or server:', error);
+  }
 }
 
 // const conversionUSDtoEUR = data.conversion_rates.EUR
 // const baseUrl = 'https://v6.exchangeratesapi.io/latest';
 // API integration modules
 const currencyApiModule = (event) => {
-  event.preventDefault();
-  // console.log(document.getElementById("amount").value);
-  // const url=`${apiUrl}/latest?access_key=${APIkey}&base=USD`
-  // const url=`${apiUrl}/latest/${APIkey}/USD`
-  // const APIkey = '6e2a72528ec1fefdb7cb82e0';
+  event.preventDefault()
+  // console.log(document.getElementById("amount").value);  
+
   // Functions for currency API integration
-  var currencyIn = document.getElementById("dropListInput").value;
-  var currencyOut = document.getElementById("dropListOutput").value;
-  var input = document.getElementById("calculator-input").value;
-  console.log(currencyIn);
-  console.log(currencyOut);
+  var currencyIn = document.getElementById('dropListInput').value
+  var currencyOut = document.getElementById('dropListOutput').value
+  var input = document.getElementById("calculator-input").value
+  //console.log(currencyIn)
+  //console.log(currencyOut)
   fetch(`${apiUrl}/${APIkey}/pair/${currencyIn}/${currencyOut}/${input}`, {
-    mode: "cors",
+    mode: 'cors',
     headers: {
       // 'Content-Type': 'application/json',
-      "Access-Control-Allow-Origin": "*",
-    },
+      'Access-Control-Allow-Origin': '*'
+    }
   })
-    .then((response) => response.json())
-    .then((data) => {
+    .then(response => response.json())
+    .then(data => {
       //   // Process the data retrieved from the server
       //console.log(data);
       //console.log(input)
-      document.getElementById("calculator-output").innerHTML =
-        data.conversion_result.toFixed(2) + " " + currencyOut;
+      document.getElementById("calculator-output").innerHTML = data.conversion_result.toFixed(2) + ' ' + currencyOut
     })
-    .catch((error) => {
-      console.error("Fetch error:", error);
+    .catch(error => {
+      console.error('Fetch error:', error);
     });
 };
-searchForm.addEventListener("submit", currencyApiModule);
+searchForm.addEventListener("submit", currencyApiModule)
 
 const hotelsApiModule = (() => {
   // Functions for hotels API integration
-  const url =
-    "https://hotels-com-provider.p.rapidapi.com/v2/meta/convert/slug-id?slug=ho219115";
-  const options = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "6eb4b4c13bmshfee3d464e5fa587p106a74jsn4cc33a147548",
-      "X-RapidAPI-Host": "hotels-com-provider.p.rapidapi.com",
-    },
-  };
-
-  fetch(url, options)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
 })();
 
 // UI update modules
 const currencyUIModule = (() => {
   // Functions to update the currency UI
+})();
+
+const flightsUIModule = (() => {
+  // Functions to update the flights UI
 })();
 
 const hotelsUIModule = (() => {
@@ -108,6 +135,6 @@ const init = () => {
 };
 
 // Run initialization when the DOM is ready
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   init();
 });
