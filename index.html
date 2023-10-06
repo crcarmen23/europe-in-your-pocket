@@ -62,18 +62,34 @@
 
     <hr>
 
-    <div class="section is-medium" id="flight-finder">
+    <div class="section is-medium" id="weather-checker">
       <div class="tile is-parent is-vertical is-success">
-        <form class="box" id="flight-search-form">
-            <h3 class="label is-large">&#9992Flight Finder</h3>
-            <h5 class="label">To:</h5>
-          <input class="input" id="flight-city" type="text" placeholder="Where are you leaving from?" />
-          <br>
-          <h5 class="label">From:</h5>
-          <input class="input" id="flight-city" type="text" placeholder="Final Destination"/>
+        <form class="box" id="weather-search-form">
+            <h3 class="label is-large">Check the Weather</h3>
+            <h5 class="label">City:</h5>
+          <input class="input" id="weather-city" type="text" placeholder="type a city name" />
+          
           <br>
           <br>
-          <button type="submit" class="button is-medium is-info">Get Flights</button>
+          <div id="weather-card" style="display: none;">
+            <div class="card" >
+                <div class="card-content">
+                  <div class="media">
+                    <div class="media-content">
+                      <p id="selected-city-title" class="title is-3">
+                        Atlanta  
+                      </p>
+                      <p id="temp">High Temp: 76.62F</p>
+                      <p id="wind">Wind: 9.43 MPH</p>
+                      <p id="humidity">Humidity: 99%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <br>
+          </div>
+          <button id="weather-button" type="submit" class="button is-medium is-info">Get Current Weather</button>
         </form>
       </div>
     </div>
