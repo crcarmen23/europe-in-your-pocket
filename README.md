@@ -2,7 +2,7 @@
 
 ## Description
 
-Created code from scratch for an informative website that helps prospective travelers find flights to and from their selected destinations and get currency exchange totals by entering their budgeted amount and selecting the desired currency. 
+Created code from scratch for an informative website that helps prospective travelers get currency exchange totals by entering their budgeted amount and selecting the desired currency, as well as view the weather forecast in their target destination.
 
 ## Installation
 
@@ -10,17 +10,16 @@ N/A
 
 ## Usage
 
-This website can be used to see how much your travel budget is worth in the currency you are traveling to, as well as find flights in your targeted destination. 
+This website can be used to see how much your travel budget is worth in the currency of the country you are traveling to and view the current weather in a destination of your choosing. 
 
-[Link to Europe in Your Pocket webpage]()
+[Link to Europe in Your Pocket webpage](https://crcarmen23.github.io/europe-in-your-pocket/)
 
-![screenshot]()
+![screenshot](./assets/images/screenshot.png)
 
 
 ## Credits
 
-Group Members: Carmen Regina, Conor Reed, Kevin Serrano, and Zechiel Lozer
-Collaborated with Leif Hetland, Fred Kamm, Mohit Dhankher, and coding bootcamp team members/peers.
+Carmen Regina, Conor Reed, Kevin Serrano, and Zechiel Lozer with help from Leif Hetland, Fred Kamm, and Mohit Dhankher.
 
 ## License
 
