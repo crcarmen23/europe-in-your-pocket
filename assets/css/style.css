@@ -26,3 +26,8 @@ img {
     height: 300px !important;
 }
 
+.box {
+    background-color: rgb(198, 220, 198);
+    text-align: center;
+}
+

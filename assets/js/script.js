@@ -1,75 +1,162 @@
-var searchForm = document.getElementById("search-form")
-// Chart.js module
-const chartModule = (() => {
-  // Functions related to Chart.js integration
-})();
+const currencyApiUrl = "https://v6.exchangerate-api.com/v6";
+const currencyAPIkey = "6e2a72528ec1fefdb7cb82e0";
+const weatherApiKey = "0b9a41ab88d3449f9b0210738230510";
 
+const cacheName = "my-data-cache";
+/* window.onload = async () => {
+  await getCodes();
+}; */
+
+// Function to fetch data and populate the dropdown
+async function getCodes() {
+  try {
+    // Open the cache
+    const cache = await caches.open(cacheName);
+
+    // Check if the data is in the cache
+    const cachedResponse = await cache.match(
+      `${currencyApiUrl}/${currencyAPIkey}/codes`
+    );
+
+    if (cachedResponse) {
+      console.log("Using cached response");
+      // If data is found in the cache, use it
+      const data = await cachedResponse.json();
+      var codes = [];
+      dropListInput = document.getElementById("dropListInput");
+      dropListOutput = document.getElementById("dropListOutput");
+
+      codes = data.supported_codes;
+      for (let i = 0; i < data.supported_codes.length; i++) {
+        //console.log(codes[i][1])
+        var optionIn = document.createElement("option");
+        optionIn.value = codes[i][0];
+        optionIn.text = codes[i][1];
+        dropListInput.appendChild(optionIn);
+
+        var optionOut = document.createElement("option");
+        optionOut.value = codes[i][0];
+        optionOut.text = codes[i][1];
+        dropListOutput.appendChild(optionOut);
+      }
+    } else {
+      console.log("Data not found in cache. Fetching and caching now...");
+
+      // Fetch the data from the server
+      const response = await fetch(`${currencyApiUrl}/${currencyAPIkey}/codes`);
+
+      // Store the fetched data in the cache
+      cache.put(`${currencyApiUrl}/${currencyAPIkey}/codes`, response.clone());
+
+      const data = await response.json();
+
+      // Populate the dropdown with the fetched data
+      var codes = [];
+      dropListInput = document.getElementById("dropListInput");
+      dropListOutput = document.getElementById("dropListOutput");
+
+      // Clear existing options
+      dropListInput.innerHTML = "";
+      dropListOutput.innerHTML = "";
+
+      codes = data.supported_codes;
+      for (let i = 0; i < data.supported_codes.length; i++) {
+        //console.log(codes[i][1])
+        var optionIn = document.createElement("option");
+        optionIn.value = codes[i][0];
+        optionIn.text = codes[i][1];
+        dropListInput.appendChild(optionIn);
+
+        var optionOut = document.createElement("option");
+        optionOut.value = codes[i][0];
+        optionOut.text = codes[i][1];
+        dropListOutput.appendChild(optionOut);
+      }
+    }
+  } catch (error) {
+    console.error("Error getting data from cache or server:", error);
+  }
+}
+
+// const conversionUSDtoEUR = data.conversion_rates.EUR
+// const baseUrl = 'https://v6.exchangeratesapi.io/latest';
 // API integration modules
 const currencyApiModule = (event) => {
-  event.preventDefault()
-  console.log(document.getElementById("amount").value);
-  const apiUrl = 'https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD';
-  const APIkey = '6e2a72528ec1fefdb7cb82e0';
+  event.preventDefault();
+  // console.log(document.getElementById("amount").value);
+
   // Functions for currency API integration
-  fetch('https://v6.exchangerate-api.com/v6/6e2a72528ec1fefdb7cb82e0/latest/USD')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
+  var currencyIn = document.getElementById("dropListInput").value;
+  var currencyOut = document.getElementById("dropListOutput").value;
+  var input = document.getElementById("calculator-input").value;
+  //console.log(currencyIn)
+  //console.log(currencyOut)
+  fetch(
+    `${currencyApiUrl}/${currencyAPIkey}/pair/${currencyIn}/${currencyOut}/${input}`,
+    {
+      mode: "cors",
+      headers: {
+        // 'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      //   // Process the data retrieved from the server
+      //console.log(data);
+      //console.log(input)
+      document.getElementById("calculator-output").innerHTML =
+        data.conversion_result.toFixed(2) + " " + currencyOut;
     })
-    .then(data => {
-      // Process the data retrieved from the server
-      console.log(data);
-    })
-    .catch(error => {
-      console.error('Fetch error:', error);
-    });
-};
-searchForm.addEventListener("submit", currencyApiModule)
-
-const flightsApiModule = (() => {
-  const flightApiUrl = "https://api.aviationstack.com/v1/flights";
-  const flightKey = "12e5b1703d9f0bd7eb3883bb358f97ae";
-
-  // https://api.aviationstack.com/v1/flights?access_key=12e5b1703d9f0bd7eb3883bb358f97ae
-
-  fetch("https://api.aviationstack.com/v1/flights?access_key=12e5b1703d9f0bd7eb3883bb358f97ae")
-    .then(res => {
-      return res.json();
-    })
-    .then(data => {
-      console.log(data);
-    })
-    .catch(error => {
+    .catch((error) => {
       console.error("Fetch error:", error);
     });
-  // Functions for flights API integration
-})();
+};
 
-const hotelsApiModule = (() => {
-  // Functions for hotels API integration
-})();
+//functions to make weather data display
+const searchForCity = (event) => {
+  event.preventDefault();
+  const cityInput = document.getElementById("weather-city");
+  if (cityInput) {
+    const cityName = cityInput.value;
+    const apiUrl = `https://api.weatherapi.com/v1/current.json?key=${weatherApiKey}&q=${cityName}`;
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        const city = document.getElementById("selected-city-title");
+        city.textContent = cityName;
 
-// UI update modules
-const currencyUIModule = (() => {
-  // Functions to update the currency UI
-})();
+        const temp = document.getElementById(`temp`);
+        temp.textContent = `High Temp: ${data.current.temp_f}° F`;
 
-const flightsUIModule = (() => {
-  // Functions to update the flights UI
-})();
+        const wind = document.getElementById(`wind`);
+        wind.textContent = `Wind: ${data.current.wind_mph} MPH`;
 
-const hotelsUIModule = (() => {
-  // Functions to update the hotels UI
-})();
+        const humidity = document.getElementById(`humidity`);
+        humidity.textContent = `Humidity: ${data.current.humidity} %`;
+
+        const weatherCard = document.getElementById("weather-card");
+        if (weatherCard) {
+          weatherCard.style.display = "block";
+        }
+      })
+      .catch((error) => console.error("Error fetching weather data:", error));
+  }
+};
 
 // Initialization
 const init = () => {
   // Initialize event listeners and other setup
+  var currencySearchForm = document.getElementById("search-form");
+  currencySearchForm.addEventListener("submit", currencyApiModule);
+
+  var weatherSearchForm = document.getElementById("weather-search-form");
+  weatherSearchForm.addEventListener("submit", searchForCity);
 };
 
 // Run initialization when the DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  await getCodes();
   init();
 });
