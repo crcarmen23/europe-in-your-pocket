@@ -4,10 +4,6 @@
 
 Created code from scratch for an informative website that helps prospective travelers get currency exchange totals by entering their budgeted amount and selecting the desired currency, as well as view the weather forecast in their target destination.
 
-## Installation
-
-N/A
-
 ## Usage
 
 This website can be used to see how much your travel budget is worth in the currency of the country you are traveling to and view the current weather in a destination of your choosing. 
